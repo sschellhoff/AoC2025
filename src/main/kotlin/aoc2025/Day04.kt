@@ -9,11 +9,7 @@ class Day04: Day<Long, Long>(4, 2025, 13, 43) {
         val grid = Grid.fromString(input) {
             it
         }
-        var count = 0
-        grid.forEachIndexedI { x, y, _ ->
-            count += if (grid.isAccessible(x, y)) 1 else 0
-        }
-        return count.toLong()
+        return grid.getAccessible().size.toLong()
     }
 
     override fun part2(input: String, isTest: Boolean): Long {
@@ -22,21 +18,30 @@ class Day04: Day<Long, Long>(4, 2025, 13, 43) {
         }
         var count = 0
         while(true) {
-            val nodesToRemove = mutableListOf<Vector2i>()
-            grid.forEachIndexedI { x, y, _ ->
-                if (grid.isAccessible(x, y)) {
-                    nodesToRemove.add(Vector2i(x, y))
-                    count += 1
-                }
-            }
-            if (nodesToRemove.isEmpty()) {
-                break
-            }
-            nodesToRemove.forEach { pos ->
-                grid.set(pos, 'x')
+            when(val n = grid.step()) {
+                0 -> break
+                n -> count += n
             }
         }
         return count.toLong()
+    }
+
+    private fun Grid<Char>.step(): Int {
+        val toRemove = this.getAccessible()
+        toRemove.forEach { pos ->
+            this.set(pos, 'x')
+        }
+        return toRemove.size
+    }
+
+    private fun Grid<Char>.getAccessible(): List<Vector2i> {
+        val result = mutableListOf<Vector2i>()
+        this.forEachIndexedI { x, y, _ ->
+            if (this.isAccessible(x, y)) {
+                result.add(Vector2i(x, y))
+            }
+        }
+        return result
     }
 
     private fun Grid<Char>.isAccessible(x: Int, y: Int): Boolean {
