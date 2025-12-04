@@ -45,17 +45,27 @@ data class SparseGrid<T>(private val data: MutableMap<Vector2, T> = mutableMapOf
     override fun getNeighboursVonNeumann(position: Vector2i, predicate: Predicate<Vector2i>): List<Vector2i> =
         getNeighboursVonNeumann(position.toVector2()) { predicate.test(it.toVector2i()) }.map { it.toVector2i() }
 
+    private val mooreNeighbourDeltas = setOf(
+        Vector2(-1, -1), Vector2(0, -1), Vector2(1, -1),
+        Vector2(-1, 0), Vector2(1, 0),
+        Vector2(-1, 1), Vector2(0, 1), Vector2(1, 1)
+    )
+
     override fun getNeighboursMoore(
         position: Vector2,
         predicate: Predicate<Vector2>
     ): List<Vector2> {
-        TODO("Not yet implemented")
+        if(!inBounds(position)) {
+            return emptyList()
+        }
+
+        return mooreNeighbourDeltas.map { delta ->
+            position + delta
+        }.filter { inBounds(it) && predicate.test(it) }
     }
 
     override fun getNeighboursMoore(
         position: Vector2i,
         predicate: Predicate<Vector2i>
-    ): List<Vector2i> {
-        TODO("Not yet implemented")
-    }
+    ): List<Vector2i> = getNeighboursMoore(position.toVector2()) { predicate.test(it.toVector2i()) }.map { it.toVector2i() }
 }
