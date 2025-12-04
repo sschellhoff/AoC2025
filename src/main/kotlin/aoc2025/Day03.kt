@@ -4,10 +4,10 @@ import de.sschellhoff.utils.Day
 
 class Day03: Day<Long, Long>(3, 2025, 357, 3121910778619) {
     override fun part1(input: String, isTest: Boolean): Long =
-        input.lines().sumOf { it.toBank().findLargestPossibleJoltage(2) }//it.findLargestPossibleJoltage() }
+        input.lines().sumOf { it.toBank().findLargestPossibleJoltage(2) }
 
     override fun part2(input: String, isTest: Boolean): Long =
-        input.lines().sumOf { it.toBank().findLargestPossibleJoltage(12) }//it.findLargestPossibleJoltage2(12) }
+        input.lines().sumOf { it.toBank().findLargestPossibleJoltage(12) }
 
     private tailrec fun List<Int>.findLargestPossibleJoltage(size: Int, acc: Long = 0): Long {
         if (size == 0) {
