@@ -15,6 +15,8 @@ data class Vector2(val x: Long, val y: Long) {
         val Down = Vector2(0, 1)
         val Left = Vector2(-1, 0)
         val Right = Vector2(1, 0)
+
+        fun fromString(s: String): Vector2 = s.split(",").let { (x, y) -> Vector2(x.toLong(), y.toLong()) }
     }
 }
 
@@ -38,6 +40,8 @@ data class Vector2i(val x: Int, val y: Int) {
         val Down = Vector2i(0, 1)
         val Left = Vector2i(-1, 0)
         val Right = Vector2i(1, 0)
+
+        fun fromString(s: String): Vector2i = s.split(",").let { (x, y) -> Vector2i(x.toInt(), y.toInt()) }
     }
 }
 

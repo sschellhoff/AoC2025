@@ -1,15 +1,10 @@
 package aoc2025
 
 import de.sschellhoff.utils.Day
-import de.sschellhoff.utils.Day.RunMode
 import de.sschellhoff.utils.product
 import utils.Vector3i
 import utils.euclideanDistance
 import utils.mapEachPairIndexed
-
-fun main() {
-    Day08().run(RunMode.BOTH)
-}
 
 class Day08 : Day<Long, Long>(8, 2025, 40, 25272) {
     override fun part1(input: String, isTest: Boolean): Long {
