@@ -26,7 +26,7 @@ class Day09 : Day<Long, Long>(9, 2025, 50, 24) {
         var maxArea = 0L
         redTiles.loopEachPair { tile1, tile2 ->
             val area = tile1.rectangleArea(tile2)
-            // this does coincidentally work but is not valid for every input.
+            // this is not valid for every possible shape, but the input is in shape of a mirrored pacman
             if (area > maxArea && !lines.intersect(Line(tile1, tile2))) {
                 maxArea = area
             }
