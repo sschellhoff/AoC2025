@@ -10,6 +10,8 @@ repositories {
 }
 
 dependencies {
+    implementation("com.google.ortools:ortools-java:9.8.3296")
+    implementation("tools.aqua:z3-turnkey:4.14.1")
     testImplementation(kotlin("test"))
 }
 
