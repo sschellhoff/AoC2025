@@ -1,4 +1,4 @@
-package aoc2025
+package de.sschellhoff.aoc2025
 
 import de.sschellhoff.utils.Day
 import de.sschellhoff.utils.Vector2
